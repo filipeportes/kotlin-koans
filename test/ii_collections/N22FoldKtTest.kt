@@ -14,9 +14,21 @@ class N22FoldKtTest {
                 ),
                 customer(reka, Budapest,
                         order(idea),
-                        order(youTrack)
+                        order(youTrack),
+                        order(webStorm)
+                ),
+                customer(bajram, Ankara,
+                        order(idea),
+                        order(appCode),
+                        order(webStorm)
+                ),
+                customer(riku, Tokyo,
+                        order(idea),
+                        order(dotCover),
+                        order(webStorm)
                 )
+
         )
-        assertEquals(setOf(idea), testShop.getSetOfProductsOrderedByEveryCustomer())
+        assertEquals(setOf(idea, webStorm), testShop.getSetOfProductsOrderedByEveryCustomer())
     }
 }
