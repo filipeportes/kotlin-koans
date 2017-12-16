@@ -2,7 +2,7 @@ package iv_properties
 
 import iii_conventions.MyDate
 import util.TODO
-import java.util.*
+import java.time.LocalDate
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -27,21 +27,18 @@ class D {
 }
 
 class EffectiveDate<R> : ReadWriteProperty<R, MyDate> {
-    var timeInMillis: Long? = null
+    var timeInMillis: Long = 0
 
-    operator override fun getValue(thisRef: R, property: KProperty<*>): MyDate = todoTask35()
-    operator override fun setValue(thisRef: R, property: KProperty<*>, value: MyDate) = todoTask35()
-}
+    operator override fun getValue(thisRef: R, property: KProperty<*>): MyDate {
+        return timeInMillis.toDate()
+    }
 
-fun MyDate.toMillis(): Long {
-    val c = Calendar.getInstance()
-    c.set(year, month, dayOfMonth, 0, 0, 0)
-    c.set(Calendar.MILLISECOND, 0)
-    return c.timeInMillis
+    operator override fun setValue(thisRef: R, property: KProperty<*>, value: MyDate) {
+        timeInMillis = value.toMillis()
+    }
 }
 
 fun Long.toDate(): MyDate {
-    val c = Calendar.getInstance()
-    c.timeInMillis = this
-    return MyDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE))
+    val d = LocalDate.ofEpochDay(this)
+    return MyDate(d.year, d.monthValue - 1, d.dayOfMonth)
 }

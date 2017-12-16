@@ -22,6 +22,8 @@ data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparab
         }
         return MyDate(add.year, add.monthValue - 1, add.dayOfMonth)
     }
+
+    fun toMillis(): Long = localDate.toEpochDay()
 }
 
 operator fun MyDate.rangeTo(other: MyDate) = DateRange(this, other)
