@@ -9,15 +9,14 @@ fun todoTask38(): Nothing = TODO(
 )
 
 fun <T> T.myApply(f: T.() -> Unit): T {
-    todoTask38()
+    f()
+    return this
 }
 
 fun buildString(): String {
     return StringBuilder().myApply {
         append("Numbers: ")
-        for (i in 1..10) {
-            append(i)
-        }
+        kotlin.repeat(10) { append(it + 1) }
     }.toString()
 }
 
